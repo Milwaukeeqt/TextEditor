@@ -13,7 +13,7 @@ public class FileIO {
     private StyledDocument sDoc;
     private DefaultEditorKit kit;
     private File file;
-    FileNameExtensionFilter filter;
+    private FileNameExtensionFilter filter;
 
     public FileIO() {
         filter = new FileNameExtensionFilter("Normal text file (*.txt)", "txt");
@@ -24,25 +24,33 @@ public class FileIO {
         sDoc = (StyledDocument) text.getDocument();
         try {
             if(sDoc.getLength() != 0) {
+
+                String dir;
+                if (file == null) {
+                    dir = System.getProperty("user.dir");
+                } else {
+                    dir = file.getAbsolutePath();
+                }
+
                 Object[] options = {"Yes", "No", "Cancel"};
                 int n = JOptionPane.showOptionDialog(view,
-                        "Do you want to save changes to " ,
+                        "Do you want to save changes to " + dir,
                         view.getTitle(),
                         JOptionPane.YES_NO_CANCEL_OPTION,
                         JOptionPane.QUESTION_MESSAGE,
                         null,
                         options,
                         options[2]);
-                if(n == 0) {
-                    if(file.exists()) {
+                if (n == 0) {
+                    if (file.exists()) {
                         save();
                     } else {
                         saveAs(text);
                     }
-                    sDoc.remove(0,sDoc.getLength());
+                    sDoc.remove(0, sDoc.getLength());
                 }
-                if(n == 1) {
-                    sDoc.remove(0,sDoc.getLength());
+                if (n == 1) {
+                    sDoc.remove(0, sDoc.getLength());
                 }
             }
         } catch (BadLocationException e) {
@@ -83,7 +91,7 @@ public class FileIO {
             file = chooserSaveAs.getSelectedFile();
             BufferedOutputStream out;
             try {
-                out = new BufferedOutputStream(new FileOutputStream(file));
+                out = new BufferedOutputStream(new FileOutputStream(file + ".txt"));
                 kit.write(out, sDoc, sDoc.getStartPosition().getOffset(), sDoc.getLength());
                 out.close();
                 state = true;
