@@ -42,7 +42,7 @@ public class FileIO {
                         options,
                         options[2]);
                 if (n == 0) {
-                    if (file.exists()) {
+                    if (file != null) {
                         save();
                     } else {
                         saveAs(text);
@@ -86,8 +86,7 @@ public class FileIO {
         chooserSaveAs.setDialogTitle("Save as..");
 
         boolean state = false;
-        if(chooserSaveAs.showSaveDialog(text) == JFileChooser.APPROVE_OPTION)
-        {
+        if(chooserSaveAs.showSaveDialog(text) == JFileChooser.APPROVE_OPTION) {
             file = chooserSaveAs.getSelectedFile();
             BufferedOutputStream out;
             try {
@@ -104,8 +103,7 @@ public class FileIO {
 
     public void save() {
         BufferedOutputStream out;
-        try
-        {
+        try {
             out = new BufferedOutputStream(new FileOutputStream(file));
             kit.write(out, sDoc, sDoc.getStartPosition().getOffset(), sDoc.getLength());
             out.close();

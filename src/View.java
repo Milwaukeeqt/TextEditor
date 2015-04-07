@@ -28,7 +28,6 @@ public class View extends JFrame implements Runnable {
 
     public void InitComponent() {
 
-
         text = new Text();
         Menu menu = new Menu(text, this);
         setJMenuBar(menu);
