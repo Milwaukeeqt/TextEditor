@@ -30,7 +30,7 @@ public class Menu extends JMenuBar {
         });
 
         open.addActionListener(e -> {
-            boolean state = fileIO.open(text);
+            boolean state = fileIO.open(text, view);
             save.setEnabled(state);
         });
 
@@ -39,7 +39,7 @@ public class Menu extends JMenuBar {
         });
 
         saveAs.addActionListener(e -> {
-            boolean state = fileIO.saveAs(text);
+            boolean state = fileIO.saveAs(text, view);
             save.setEnabled(state);
         });
 

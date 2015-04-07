@@ -45,7 +45,7 @@ public class FileIO {
                     if (file != null) {
                         save();
                     } else {
-                        saveAs(text);
+                        saveAs(text, view);
                     }
                     sDoc.remove(0, sDoc.getLength());
                 }
@@ -58,7 +58,7 @@ public class FileIO {
         }
     }
 
-    public boolean open(Text text) {
+    public boolean open(Text text, View view) {
         sDoc = (StyledDocument) text.getDocument();
         JFileChooser chooserOpen = new JFileChooser();
         chooserOpen.setFileFilter(filter);
@@ -79,7 +79,7 @@ public class FileIO {
         return state;
     }
 
-    public boolean saveAs(Text text) {
+    public boolean saveAs(Text text, View view) {
         sDoc = (StyledDocument) text.getDocument();
         JFileChooser chooserSaveAs = new JFileChooser();
         chooserSaveAs.setFileFilter(filter);
