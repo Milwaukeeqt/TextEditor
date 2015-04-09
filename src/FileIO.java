@@ -51,6 +51,7 @@ public class FileIO {
                 }
                 if (n == 1) {
                     sDoc.remove(0, sDoc.getLength());
+                    view.updateTitle("New Text Document");
                 }
             }
         } catch (BadLocationException e) {
@@ -72,6 +73,7 @@ public class FileIO {
                 kit.read(in, sDoc, sDoc.getStartPosition().getOffset());
                 in.close();
                 state = true;
+                view.updateTitle(file.getName());
             } catch (BadLocationException | IOException e) {
                 e.printStackTrace();
             }
@@ -94,6 +96,7 @@ public class FileIO {
                 kit.write(out, sDoc, sDoc.getStartPosition().getOffset(), sDoc.getLength());
                 out.close();
                 state = true;
+                view.updateTitle(file.getName());
             } catch (BadLocationException | IOException e) {
                 e.printStackTrace();
             }
@@ -104,7 +107,7 @@ public class FileIO {
     public void save() {
         BufferedOutputStream out;
         try {
-            out = new BufferedOutputStream(new FileOutputStream(file));
+            out = new BufferedOutputStream(new FileOutputStream(file + ".txt"));
             kit.write(out, sDoc, sDoc.getStartPosition().getOffset(), sDoc.getLength());
             out.close();
         } catch (BadLocationException | IOException e) {

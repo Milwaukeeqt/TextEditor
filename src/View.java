@@ -52,9 +52,7 @@ public class View extends JFrame implements Runnable {
         return title;
     }
 
-    public void setTitle(String s) {
-        title = title + " - " + s;
-
-        //open file needs work
+    public void updateTitle(String s) {
+        setTitle(title + " - " + s);
     }
 }
